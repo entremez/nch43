@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoordinatesController;
+use App\Http\Controllers\CoinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use App\Http\Controllers\CoordinatesController;
 */
 
 Route::get('/nch43/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43']);
+
+Route::get('/el-que-quieras', [CoinController::class, 'home']);
