@@ -81,10 +81,12 @@ class CoordinatesController extends Controller
                             $numero->put('valido', false);
                         if($numero['valido'])
                             $valido++;
-                        $column++;
+                        
                         $salida[] = $numero;
+                        if($valido >= $samples)
+                            break;
                     }
-
+                    $column++;
                 }
             }elseif($procedimiento->digits == 2){
                 
