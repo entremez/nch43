@@ -15,6 +15,6 @@ use App\Http\Controllers\CoinController;
 |
 */
 
-Route::get('/nch43/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43']);
+Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43']);
 
 Route::get('/el-que-quieras', [CoinController::class, 'home']);
