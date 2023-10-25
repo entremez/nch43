@@ -43,7 +43,7 @@ function validateForm() {
   let lote = document.getElementById('lot').value;
   let muestras = document.getElementById('samples').value;
   event.preventDefault()
-    if(Number(lote) < Number(muestras)){
+    if(Number(lote) <= Number(muestras)){
       alert("El lote debe ser mayor al número de muestras a sleccionar.");
     }else{
       document.getElementById('form').submit();
