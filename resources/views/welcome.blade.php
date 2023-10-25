@@ -26,6 +26,7 @@
   $aux = 1;
 @endphp
 
+<div class="px-10 py-5">
 <div class="py-2">Lote: {{ $lote }}</div>
 <div class="py-2">Muestras: {{ $muestras }}</div>
 <div class="py-2">Coordenadas iniciales: {{ $inicial }}</div>
@@ -64,6 +65,13 @@
   </div>
 </div>
 
+<hr
+  class="my-12 h-0.5 border-t-0 bg-neutral-100" />
+
+@include('form')
+
+
+</div>
     
 
 

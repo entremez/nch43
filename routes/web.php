@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CoordinatesController;
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\CoordinatesController;
+use App\Http\Controllers\FormController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,12 @@ use App\Http\Controllers\CoinController;
 |
 */
 
-Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43']);
+Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43'])->name('samples');
 
 Route::get('/el-que-quieras', [CoinController::class, 'home']);
 
 Route::view('/','home');
+
+Route::get('/form', [FormController::class, 'form']);
+
+Route::view('/how','how');
