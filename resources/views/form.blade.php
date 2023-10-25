@@ -40,11 +40,11 @@ Otra forma de obtener muestreos
 
 <script>
 function validateForm() {
-  event.preventDefault()
   let lote = document.getElementById('lot').value;
   let muestras = document.getElementById('samples').value;
-    if(lote <= muestras){
-      alert("El lote debe ser mayor al número de muestras a sleccionar.")
+  event.preventDefault()
+    if(Number(lote) < Number(muestras)){
+      alert("El lote debe ser mayor al número de muestras a sleccionar.");
     }else{
       document.getElementById('form').submit();
     }
