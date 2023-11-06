@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coordinate;
 use App\Models\Procedure;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CoordinatesController extends Controller
 {
@@ -15,7 +16,7 @@ class CoordinatesController extends Controller
         $limit_row = [35, 70, 105, 140, 175, 210, 245, 250];
         $limit_column = 20;
 
-        $initial_coordinate = $row.'/'.$column;
+        
 
         $procedimiento = Procedure::where('max','>=',$lote)->where('min','<=',$lote)->first();
 
@@ -119,12 +120,7 @@ class CoordinatesController extends Controller
         }
         //intval(filter_var($number, FILTER_SANITIZE_NUMBER_INT))
 
-        return view('welcome', [
-            'data' => json_encode($salida),
-            'lote' => $lote,
-            'muestras' => $samples,
-            'inicial' => $initial_coordinate
-        ]);
+        return json_encode($salida);
     }
 
     private function alreadyTake($numero, $salidas)
@@ -194,5 +190,27 @@ class CoordinatesController extends Controller
 
     private function itsZeros($numero, $reglas){
         return (str_split($numero, $reglas->digits)[0] == str_repeat("0", $reglas->digits));
+    }
+
+
+    public function getView($lote, $samples, $row, $column){
+        $initial_coordinate = $row.'/'.$column;
+        return view('welcome', [
+             'data'=> $this->nch43($lote, $samples, $row, $column),
+            'lote' => $lote,
+            'muestras' => $samples,
+            'inicial' => $initial_coordinate
+        ]);
+    }
+
+    public function toPdf($lote, $samples, $row, $column) {
+        $initial_coordinate = $row.'/'.$column;
+        $pdf = Pdf::loadView('welcome2', [
+            'data'=> $this->nch43($lote, $samples, $row, $column),
+            'lote' => $lote,
+            'muestras' => $samples,
+            'inicial' => $initial_coordinate]);
+        return $pdf->setPaper('letter', 'landscape')->download('nch43.pdf');
+        
     }
 }

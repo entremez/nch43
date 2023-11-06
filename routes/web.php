@@ -5,7 +5,6 @@ use App\Http\Controllers\CoordinatesController;
 use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'nch43'])->name('samples');
+Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'getview'])->name('samples');
 
 Route::get('/el-que-quieras', [CoinController::class, 'home']);
 
@@ -26,3 +25,6 @@ Route::view('/','home');
 Route::get('/form', [FormController::class, 'form']);
 
 Route::view('/how','how');
+
+Route::get('/topdf/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'toPdf']);
+
