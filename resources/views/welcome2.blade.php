@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>NCh43 - mez</title>
+        <title>NCh43.cl</title>
 
         <!-- Fonts -->
 
