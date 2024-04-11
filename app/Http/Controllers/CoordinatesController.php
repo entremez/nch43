@@ -173,8 +173,8 @@ class CoordinatesController extends Controller
                     if($number%$procedimiento->divider>$lote)
                         $numero->put('comentario', 'Valor final mayor al lote.');
                     $numero->put('operación', floor($number/$procedimiento->divider).' x '.$procedimiento->divider.' + '.$number%$procedimiento->divider.' = '.$number);
-                    if($number <= $lote)
-                        $numero->put('operación', 'NA');
+                    if($number <= $lote);
+                        //$numero->put('operación', 'NA');
                 }
             }else{
                 $numero->put('valor_final', $number);

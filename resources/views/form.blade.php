@@ -41,6 +41,9 @@ Otra forma de obtener muestreos
       <div class="text-center">
       <p class="text-center"><span  class="underline decoration-1">hola@nch43.cl</span></p>
       </div>
+      <div class="text-center">
+      <p class="text-center"><span  class="text-slate-600">by <br> mez | chs</span></p>
+      </div>
 </footer>
 
 
