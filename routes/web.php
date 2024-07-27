@@ -3,7 +3,9 @@
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\CoordinatesController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\V2Controller;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', [V2Controller::class, 'nch43'])->name('v2');
 
 Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'getview'])->name('samples');
 
