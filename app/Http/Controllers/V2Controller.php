@@ -303,9 +303,9 @@ class V2Controller extends Controller
         $column20_2	=	"5191337727052384495426567866250806233640970024107250957890778345881959217820379731344700956746528074628291467961293051081799055531504743773005139628249273773862335664640553818611274593349123141027807040319976136317507099761368975964186554292010886176";
 
         $lote = 15000;
-        $row = 20;
-        $col = 2;
-        $samples = 20;
+        $row = 213;
+        $col = 20;
+        $samples = 100;
 
         $init_row = [1, 36, 71, 106, 141, 176, 211, 246];
         $limit_row = [35, 70, 105, 140, 175, 210, 245, 250];
@@ -315,15 +315,23 @@ class V2Controller extends Controller
 
         $columnas_a_usar = round($procedimiento->digits/2);
 
+
         if($procedimiento->move == "utd"){
             $aux = 0;
             $numero = collect();
             $valido=0;
             $salida = [];
+                
 
             while($valido < $samples){
                 $fila = "row".$row;
-                $number = intval(filter_var(substr($$fila, $col, $procedimiento->digits), FILTER_SANITIZE_NUMBER_INT));
+                if($columnas_a_usar + $col > 20){
+                    $col_aux = 0;
+                    $fila_aux = "row".$row+1;
+                    $number = substr($$fila, $col*2 - 2).substr($$fila_aux, $col_aux*2 - 2); //TODOOO!!!!!!!!
+                }else{
+                    $number = intval(filter_var(substr($$fila, $col*2 - 2, $procedimiento->digits), FILTER_SANITIZE_NUMBER_INT));
+                }    
                 $numero->put('fila', $row);
 
                 $count = 0;
@@ -378,13 +386,13 @@ class V2Controller extends Controller
                     }else{
                         $row= $init_row[array_search($row, $limit_row)]; //seteo la fila con la inicial de su misma pagina
                         $col = $col+$columnas_a_usar;
-                        echo $col;
                     }
                 }else{
                     $row++;
                 }
                 
-
+                if($row > 250)
+                    $row = 1;
                     
 
                 $aux++;
