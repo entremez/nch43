@@ -331,7 +331,7 @@ class V2Controller extends Controller
                 if(in_array($row, $limit_row)){ //si la fila actual es la última de la pagina entro 
                     if($col+$columnas_a_usar - 1 >= 20){
                         $row++;
-                        $col = 1;
+                        $col = $col + $columnas_a_usar - 20;
                     }else{
                         $row= $init_row[array_search($row, $limit_row)]; //seteo la fila con la inicial de su misma pagina
                         $col = $col+$columnas_a_usar;
