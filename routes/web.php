@@ -18,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', [V2Controller::class, 'nch43'])->name('v2');
-
-Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'getview'])->name('samples');
+//Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'getview'])->name('samples');
+Route::get('/{lote}/{muestras}/{fila}/{columna}', [V2Controller::class, 'getview'])->name('samples');
 
 Route::get('/el-que-quieras', [CoinController::class, 'home']);
 
@@ -30,5 +29,5 @@ Route::get('/form', [FormController::class, 'form']);
 
 Route::view('/how','how');
 
-Route::get('/topdf/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'toPdf']);
+Route::get('/topdf/{lote}/{muestras}/{fila}/{columna}', [V2Controller::class, 'toPdf']);
 

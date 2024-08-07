@@ -36,7 +36,8 @@
 <h2>Selección de muestras de acuerdo a NCh43</h2>
 <div class="py-2">Lote: {{ $lote }}</div>
 <div class="py-2">Muestras: {{ $muestras }}</div>
-<div class="py-2">Coordenadas iniciales: {{ $inicial }}</div>
+<div class="py-2">Coordenada inicial: {{ $inicial }}</div>
+<div class="py-3">Coordenada final: {{ $final }}</div>
 <br>
 <br>
 <div class="flex flex-col ">
@@ -57,13 +58,13 @@
           </thead>
           <tbody>
           @foreach(json_decode($data) as $key => $coordenada)
-            <tr class="border-b dark:border-neutral-500 {{$coordenada->valido ?'':'line-through' }}">
+            <tr class="border-b dark:border-neutral-500">
               <td class="whitespace-nowrap px-6 py-1 font-medium">{{ $coordenada->valido ? $aux++:'-'}}</td>
-              <td class="whitespace-nowrap px-6 py-1">{{$coordenada->fila}}</td>
-              <td class="whitespace-nowrap px-6 py-1">{{$coordenada->columna}}</td>
-              <td class="whitespace-nowrap px-6 py-1">{{$coordenada->valor_original}}</td>
-              <td class="whitespace-nowrap px-6 py-1">{{$coordenada->valor_final}}</td>
-              <td class="whitespace-nowrap px-6 py-3">{{$coordenada->operación}}</td>
+              <td class="whitespace-nowrap px-6 py-1 {{$coordenada->valido ?'':'line-through' }}">{{$coordenada->fila}}</td>
+              <td class="whitespace-nowrap px-6 py-1 {{$coordenada->valido ?'':'line-through' }}">{{$coordenada->columna}}</td>
+              <td class="whitespace-nowrap px-6 py-1 {{$coordenada->valido ?'':'line-through' }}">{{$coordenada->valor_original}}</td>
+              <td class="whitespace-nowrap px-6 py-1 {{$coordenada->valido ?'':'line-through' }}">{{$coordenada->valor_final}}</td>
+              <td class="whitespace-nowrap px-6 py-3 {{$coordenada->valido ?'':'line-through' }}">{{$coordenada->operación}}</td>
               <td class="whitespace-nowrap px-6 py-3">{{isset($coordenada->comentario) ? $coordenada->comentario:'-' }}</td>
             </tr>
             @endforeach
