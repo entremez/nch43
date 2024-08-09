@@ -425,7 +425,11 @@ class V2Controller extends Controller
     }
 
 
-    public function getView($lote, $samples, $row, $column){
+    public function getView($lote, $samples, $row=null, $column=null){
+        if($row == null | $column == null){
+            $row = rand(1,250);
+            $column = rand(1,20);
+        }
         $data = $this->nch43($lote, $samples, $row, $column);
         $array_data = json_decode($data);
         $last_number = $array_data[count($array_data) - 1];

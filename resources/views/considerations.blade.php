@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>NCh43.cl</title>
+    <title>NCh43.cl V2</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -405,23 +405,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+<div style="height: 4rem;background-color:red; display:flex;align-items:center;justify-content:center;color:white">Bienvenidos a la nueva versión de NCh43.cl. Hemos corregido varios errores e implementado mejoras generales. Por favor, revisen los resultados y no duden en enviar sus comentarios a hola@nch43.cl. ¡Gracias!</div>
 
 <main class="flex-auto">
     <div class="px-8 mt-9">
                     <div class="">
-                        <h1 class="text-4xl font-bold ">NCh43 Online</h1>
-                        <p class="mt-6 text-base">El funcionamiento es el siguiente: Se deben cambiar los valores entre corchetes [] de la URL de acuerdo con el muestreo a realizar.</p>
+                        <h1 class="text-4xl font-bold ">Algunas consideraciones</h1>
+                        <p class="mt-6 text-xl">Uso de </p>
                         <p class="mt-3 text-base">La URL tiene la siguiente forma:</p>
-                        <p class="mt-3 text-xl">https://nch43.cl/[lote]/[muestras]/[fila_inicial]/[columna_inicial]</p>
-                        <p class="mt-6 text-base">Por lo tanto para recrear los ejemplos N°3 de la norma NCh43 las URL serían:
-                        <p class="mt-6 text-base underline">a. <a href="https://nch43.cl/15/11/250/17">https://nch43.cl/15/11/250/17</a></p>
-                        <p class="mt-3 text-base underline">b. <a href="https://nch43.cl/80/4/1/11">https://nch43.cl/80/4/1/11</a></p>
-                        <p class="mt-3 text-base underline" >c. <a href="https://nch43.cl/180/10/2/15">https://nch43.cl/180/10/2/15</a></p>
+
+
                     </div>
 
 
 </main>
 
+
 @include('form')
+
+
+
 
 </html>

@@ -18,10 +18,16 @@
       <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
         Coordenada inicial (fila / columna )
       </label>
-      <input required min="1" max="250" name="row" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="number" placeholder="2">
+      <input required min="1" max="250" name="row" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="row" type="number" placeholder="2">
       /
-      <input  required  min="1" max="20" name="columm" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="number" placeholder="15">
-      <!--<p class="text-red-500 text-xs italic">Please choose a password.</p>-->
+      <input  required  min="1" max="20" name="columm" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="column" type="number" placeholder="15">
+      
+      <div class="flex items-center mb-4">
+        <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900">Coordenadas aleatorias</label>
+      </div>
+
+
     </div>
     <div class="flex items-center justify-between">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onclick="return validateForm()">
@@ -56,12 +62,41 @@ Otra forma de obtener muestreos
 function validateForm() {
   let lote = document.getElementById('lot').value;
   let muestras = document.getElementById('samples').value;
-  event.preventDefault()
-    if(Number(lote) <= Number(muestras)){
+  let fila = document.getElementById("row").value;
+  let columna = document.getElementById("column").value;
+  event.preventDefault();
+    if(lote == "" || muestras == ""){
+      alert('Se deben completar los campos "Lote" y "Muestras"')
+    }else if(Number(lote) <= Number(muestras)){
       alert("El lote debe ser mayor al número de muestras a sleccionar.");
+    }else if( (fila == "" || columna == "") && !selectElement.checked){
+      alert('Se debe indicar la coordenada inicial (fila/columna) o seleccionar "Coordenadas aleatorias"');
     }else{
       document.getElementById('form').submit();
     }
+  
 } 
+
+const selectElement = document.querySelector("#default-checkbox");
+const fila = document.getElementById("row")
+const columna = document.getElementById("column")
+fila.disabled = selectElement.checked;
+columna.disabled = selectElement.checked;
+if(selectElement.checked){
+  fila.value = "";
+  columna.value = "";
+}
+
+selectElement.addEventListener("change", (event) => {
+    fila.disabled = selectElement.checked;
+    columna.disabled = selectElement.checked;
+    if(selectElement.checked){
+      fila.value = "";
+      columna.value = "";
+    }
+});
+
+
+
 
 </script>

@@ -19,15 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/{lote}/{muestras}/{fila}/{columna}', [CoordinatesController::class, 'getview'])->name('samples');
-Route::get('/{lote}/{muestras}/{fila}/{columna}', [V2Controller::class, 'getview'])->name('samples');
-
-Route::get('/el-que-quieras', [CoinController::class, 'home']);
+Route::get('/{lote}/{muestras}/{fila?}/{columna?}', [V2Controller::class, 'getview'])->name('samples');
 
 Route::view('/','home');
 
 Route::get('/form', [FormController::class, 'form']);
 
 Route::view('/how','how');
+Route::view('/consideraciones','considerations');
 
 Route::get('/topdf/{lote}/{muestras}/{fila}/{columna}', [V2Controller::class, 'toPdf']);
 
