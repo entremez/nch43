@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class V2Controller extends Controller
 {
 
-    public function nch43($lote, $samples, $row, $col)
+    public static function nch43($lote, $samples, $row, $col)
     {
         $row1	=	"6347437386369647366146986371623326168045";
         $row2	=	"9774246762428114572042533237322707360751";
@@ -321,9 +321,9 @@ class V2Controller extends Controller
                 $column_to_show = substr($column_to_show, 0, -2);
                 $numero->put('columna', $column_to_show);
 
-                $this->operations($procedimiento, $number, $numero, $lote);
+                V2Controller::operations($procedimiento, $number, $numero, $lote);
 
-                if($this->isAlreadyTake($numero, $salida))
+                if(V2Controller::isAlreadyTake($numero, $salida))
                     $numero->put('valido', false);
                 if($numero['valido'])
                     $valido++;
@@ -354,8 +354,8 @@ class V2Controller extends Controller
                 $numero->put('fila', $row);
                 $numero->put('columna', $col_aux+1);
 
-                $this->operations($procedimiento, $number, $numero, $lote);
-                if($this->isAlreadyTake($numero, $salida)){
+                V2Controller::operations($procedimiento, $number, $numero, $lote);
+                if(V2Controller::isAlreadyTake($numero, $salida)){
                     $numero->put('valido', false);
                     $numero->put('comentario', "Número ya considerado.");
                 }
@@ -375,7 +375,7 @@ class V2Controller extends Controller
         return json_encode($salida);
     }
 
-    private function operations($procedimiento, $number, $numero, $lote){
+    public static function operations($procedimiento, $number, $numero, $lote){
 
         $numero->put('valor_original', $number);
         if($number == 0){
@@ -410,7 +410,7 @@ class V2Controller extends Controller
         }        
     }
 
-    private function isAlreadyTake($numero, $salidas)
+    public static function isAlreadyTake($numero, $salidas)
     {
         foreach($salidas as $salida){
             if ($salida['valor_final'] == $numero['valor_final'])             
@@ -420,17 +420,17 @@ class V2Controller extends Controller
         
     }
 
-    private function itsZeros($numero, $reglas){
+    public static function itsZeros($numero, $reglas){
         return (str_split($numero, $reglas->digits)[0] == str_repeat("0", $reglas->digits));
     }
 
 
-    public function getView($lote, $samples, $row=null, $column=null){
+    public static function getView($lote, $samples, $row=null, $column=null){
         if($row == null | $column == null){
             $row = rand(1,250);
             $column = rand(1,20);
         }
-        $data = $this->nch43($lote, $samples, $row, $column);
+        $data = V2Controller::nch43($lote, $samples, $row, $column);
         $array_data = json_decode($data);
         $last_number = $array_data[count($array_data) - 1];
         $last_row = explode(" | ", $last_number->fila);
@@ -445,15 +445,15 @@ class V2Controller extends Controller
     }
 
     
-    public function toPdf($lote, $samples, $row, $column) {
+    public static function toPdf($lote, $samples, $row, $column) {
         $initial_coordinate = $row.'/'.$column;
-        $data = $this->nch43($lote, $samples, $row, $column);
+        $data = V2Controller::nch43($lote, $samples, $row, $column);
         $array_data = json_decode($data);
         $last_number = $array_data[count($array_data) - 1];
         $last_row = explode(" | ", $last_number->fila);
         $last_column = explode(" | ",$last_number->columna);
         $pdf = Pdf::loadView('welcome2', [
-            'data'=> $this->nch43($lote, $samples, $row, $column),
+            'data'=> V2Controller::nch43($lote, $samples, $row, $column),
             'lote' => $lote,
             'muestras' => $samples,
             'inicial' => $initial_coordinate,
