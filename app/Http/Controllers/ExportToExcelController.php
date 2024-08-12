@@ -57,7 +57,7 @@ class ExportToExcelController extends Controller
         $writer = new Xlsx($spreadsheet);
         $name = 'Lote:'.$lote.'_Muestras:'.$muestras;
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="' . urlencode($name) . '"'); 
+        header('Content-Disposition: attachment; filename="' . urlencode($name) . '.xlsx"'); 
         // Save .xlsx file to the current directory 
         $writer->save('php://output');
     }
