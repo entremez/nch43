@@ -35,7 +35,7 @@
   $aux = 1;
 @endphp
 
-<div style="height: 4rem;background-color:red; display:flex;align-items:center;justify-content:center;color:white">Bienvenidos a la nueva versión de NCh43.cl. Hemos corregido varios errores e implementado mejoras generales. Por favor, revisen los resultados y no duden en enviar sus comentarios a hola@nch43.cl. ¡Gracias!</div>
+<div style="padding:1.5rem;background-color:red; display:flex;align-items:center;justify-content:center;color:white">Bienvenidos a la nueva versión de NCh43.cl. Hemos corregido varios errores e implementado mejoras generales. Por favor, revisen los resultados y no duden en enviar sus comentarios a hola@nch43.cl. ¡Gracias!</div>
 
 
 <div class="px-10 py-5">

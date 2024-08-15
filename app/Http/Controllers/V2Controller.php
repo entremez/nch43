@@ -403,6 +403,7 @@ class V2Controller extends Controller
             }else{
                 $numero->put('valor_final', $number);
                 $numero->put('valido', $number<=$lote);
+                $numero->put('comentario', '-');
                 if($number>$lote)
                     $numero->put('comentario', 'Valor final mayor al lote.');
                 $numero->put('operación', 'NA');

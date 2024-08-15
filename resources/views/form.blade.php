@@ -37,10 +37,14 @@
     </div>
   </form>
 
-  <a href="/how" class="text-blue-600 visited:text-purple-600 ... px-10">
+  <div style="text-align: center;">
+  <div><a href="/how" class="text-blue-600 visited:text-purple-600 ... px-10">
 Otra forma de obtener muestreos
-</a>
-
+</a></div>
+<div><a href="/consideraciones" class="text-blue-600 visited:text-purple-600 ... px-10">
+*Consideraciones*
+</a></div>
+</div>
 <hr
   class="my-5 h-0.5 border-t-0 bg-neutral-100" />
 <footer class="footer footer-center  w-full p-4 ">

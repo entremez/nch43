@@ -51,7 +51,7 @@ class ExportToExcelController extends Controller
             $sheet->setCellValue('E'.$key+7,$row->valor_original);
             $sheet->setCellValue('F'.$key+7,$row->operación);
             $sheet->setCellValue('G'.$key+7,$row->valor_final);
-            $sheet->setCellValue('H'.$key+7,$row->comentario);
+            $sheet->setCellValue('H'.$key+7,$row->comentario??='');
         }        
         // Write an .xlsx file  
         $writer = new Xlsx($spreadsheet);
