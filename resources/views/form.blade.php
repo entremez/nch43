@@ -20,7 +20,7 @@
       </label>
       <input required min="1" max="250" name="row" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="row" type="number" placeholder="2">
       /
-      <input  required  min="1" max="20" name="columm" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="column" type="number" placeholder="15">
+      <input  required  min="1" max="20" name="column" class="shadow appearance-none border rounded w-2/6 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="column" type="number" placeholder="15">
       
       <div class="flex items-center mb-4">
         <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -35,6 +35,8 @@
       </button>
       <button></button>
     </div>
+    <input type="hidden" id="random_row" name="random_row">
+    <input type="hidden" id="random_column" name="random_column">
   </form>
 
   <div style="text-align: center;">
@@ -55,6 +57,7 @@ Otra forma de obtener muestreos
       <p class="text-center"><span  class="text-slate-600">by <br> mez | chs</span></p>
       </div>
 </footer>
+
 
 
 </div>
@@ -84,23 +87,37 @@ function validateForm() {
 const selectElement = document.querySelector("#default-checkbox");
 const fila = document.getElementById("row")
 const columna = document.getElementById("column")
-fila.disabled = selectElement.checked;
-columna.disabled = selectElement.checked;
-if(selectElement.checked){
-  fila.value = "";
-  columna.value = "";
-}
+const random_row = document.getElementById("random_row");
+const random_column = document.getElementById("random_column");
+fila.disabled = false;
+columna.disabled = false;
+selectElement.checked = false;
+fila.value = "";
+columna.value = "";
+random_row.value = "";
+random_column.value = ""; 
 
 selectElement.addEventListener("change", (event) => {
     fila.disabled = selectElement.checked;
     columna.disabled = selectElement.checked;
     if(selectElement.checked){
+      let new_row = getRandomInt(250)+1;
+      let new_column = getRandomInt(20)+1;
+      fila.value = new_row;
+      columna.value = new_column;
+      random_row.value = new_row;
+      random_column.value = new_column;
+    }else{
       fila.value = "";
       columna.value = "";
+      random_row.value = "";
+      random_column.value = "";      
     }
 });
 
-
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 
 </script>

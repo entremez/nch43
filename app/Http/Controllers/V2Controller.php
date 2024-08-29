@@ -323,8 +323,10 @@ class V2Controller extends Controller
 
                 V2Controller::operations($procedimiento, $number, $numero, $lote);
 
-                if(V2Controller::isAlreadyTake($numero, $salida))
+                if(V2Controller::isAlreadyTake($numero, $salida)){
                     $numero->put('valido', false);
+                    $numero->put('comentario', "Número considerado previamente.");
+                    }
                 if($numero['valido'])
                     $valido++;
                 
@@ -357,7 +359,7 @@ class V2Controller extends Controller
                 V2Controller::operations($procedimiento, $number, $numero, $lote);
                 if(V2Controller::isAlreadyTake($numero, $salida)){
                     $numero->put('valido', false);
-                    $numero->put('comentario', "Número ya considerado.");
+                    $numero->put('comentario', "Número considerado previamente.");
                 }
                 if($numero['valido'])
                     $valido++;
@@ -414,8 +416,10 @@ class V2Controller extends Controller
     public static function isAlreadyTake($numero, $salidas)
     {
         foreach($salidas as $salida){
-            if ($salida['valor_final'] == $numero['valor_final'])             
+            if ($salida['valor_final'] == $numero['valor_final']){             
                 return true;
+
+            }
         }
             return false;
         
@@ -427,10 +431,6 @@ class V2Controller extends Controller
 
 
     public static function getView($lote, $samples, $row=null, $column=null){
-        if($row == null | $column == null){
-            $row = rand(1,250);
-            $column = rand(1,20);
-        }
         $data = V2Controller::nch43($lote, $samples, $row, $column);
         $array_data = json_decode($data);
         $last_number = $array_data[count($array_data) - 1];
