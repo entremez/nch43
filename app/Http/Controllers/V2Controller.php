@@ -347,16 +347,16 @@ class V2Controller extends Controller
                 $salida[] = $numero;  
             }
         }else{
-            $col_aux = $col - 1;
+            $col_aux = $col*2 - 2;
             $secondary_col = 1;
             while($valido < $samples){
-                $col = round(($col_aux+1)/2);
+                $col_2 = round(($col_aux+1)/2);
                 $numero = collect();
                 $fila = "row".$row;
                 $number = str_split($$fila, $procedimiento->digits);
                 $number = $number[$col_aux];
                 $numero->put('fila', $row);
-                $numero->put('columna', $col.".".$secondary_col);
+                $numero->put('columna', $col_2.".".$secondary_col);
 
                 V2Controller::operations($procedimiento, $number, $numero, $lote);
                 if(V2Controller::isAlreadyTake($numero, $salida)){
