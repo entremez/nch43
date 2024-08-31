@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', '¿Cómo funciona? - NCh43.cl')
 @section('content')
 
 <main class="flex-auto">
@@ -13,8 +14,6 @@
                         <p class="mt-3 text-base underline">b. <a href="https://nch43.cl/80/4/1/11">https://nch43.cl/80/4/1/11</a></p>
                         <p class="mt-3 text-base underline" >c. <a href="https://nch43.cl/180/10/2/15">https://nch43.cl/180/10/2/15</a></p>
                     </div>
-
-
 </main>
 
 @include('form')

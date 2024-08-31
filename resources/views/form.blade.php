@@ -46,6 +46,9 @@ Otra forma de obtener muestreos
 <div><a href="/consideraciones" class="text-blue-600 visited:text-purple-600 ... px-10">
 *Consideraciones*
 </a></div>
+<div><a href="/control-cambios" class="text-blue-600 visited:text-purple-600 ... px-10">
+Control de cambios
+</a></div>
 </div>
 <hr
   class="my-5 h-0.5 border-t-0 bg-neutral-100" />

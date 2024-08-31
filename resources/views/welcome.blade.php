@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'NCh43.cl')
 @section('content')
 
 @php

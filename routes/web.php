@@ -28,6 +28,7 @@ Route::get('/form', [FormController::class, 'form']);
 
 Route::view('/how','how');
 Route::view('/consideraciones','considerations');
+Route::view('/control-cambios','changelog');
 Route::get('/toexcel/{lote}/{muestras}/{fila}/{columna}',[ExportToExcelController::class, 'toExcel']);
 
 Route::get('/topdf/{lote}/{muestras}/{fila}/{columna}', [V2Controller::class, 'toPdf']);
