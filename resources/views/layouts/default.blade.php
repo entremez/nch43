@@ -13,6 +13,9 @@
         </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Selección de muestras al azar de acuerdo con Norma Chilena NCh43">
+    <meta name="keywords" content="Selección de muestras al azar, nch43, muestras">
+    <meta name="author" content="mez">
 
     <title>@yield('title')</title>
 

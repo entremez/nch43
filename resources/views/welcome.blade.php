@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'NCh43.cl')
+@section('title', 'Selección del muestras - NCh43.cl')
 @section('content')
 
 @php
