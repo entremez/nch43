@@ -53,12 +53,7 @@ Control de cambios
 <hr
   class="my-5 h-0.5 border-t-0 bg-neutral-100" />
 <footer class="footer footer-center  w-full p-4 ">
-      <div class="text-center">
-      <p class="text-center"><span  class="underline decoration-1">hola@nch43.cl</span></p>
-      </div>
-      <div class="text-center">
-      <p class="text-center"><span  class="text-slate-600">by <br> mez | chs</span></p>
-      </div>
+
 </footer>
 
 

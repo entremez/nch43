@@ -417,7 +417,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<div style="padding:2rem; background-color:red; display:flex;align-items:center;justify-content:center;color:white">Bienvenidos a la nueva versión de NCh43.cl. Hemos corregido varios errores e implementado mejoras generales. Por favor, revisen los resultados y no duden en enviar sus comentarios a hola@nch43.cl. ¡Gracias!</div>
 
 @yield('content')
 
