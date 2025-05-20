@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Procedure;
-
+use App\Helpers\ProcedimientoHelper;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
@@ -265,9 +264,8 @@ class V2Controller extends Controller
 
         $init_row = [1, 36, 71, 106, 141, 176, 211, 246];
         $limit_row = [35, 70, 105, 140, 175, 210, 245, 250];
-        $limit_column = 20;
 
-        $procedimiento = Procedure::where('max','>=',$lote)->where('min','<=',$lote)->first();
+        $procedimiento = ProcedimientoHelper::getProcedimientoByLote($lote);
 
         $columnas_a_usar = round($procedimiento->digits/2);
 
