@@ -2,6 +2,13 @@
 <div class="w-full max-w-xs">
   <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="get" action="/form" id="form">
     <div class="text-2xl mb-3 text-center">Muestras según NCh43</div>
+    @if ($errors->any())
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
+        @foreach ($errors->all() as $error)
+          <p>{{ $error }}</p>
+        @endforeach
+      </div>
+    @endif
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="lot">
         Lote

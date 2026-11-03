@@ -4,12 +4,44 @@ namespace App\Http\Controllers;
 use App\Helpers\ProcedimientoHelper;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class V2Controller extends Controller
 {
+    // Tope de números leídos: sobre 3 pasadas completas de la tabla (10.000 dígitos) ya no aparecen números nuevos
+    const MAX_LECTURAS = 30000;
+
+    public static function validar($lote, $samples, $row, $col)
+    {
+        $validator = Validator::make(
+            ['lote' => $lote, 'muestras' => $samples, 'fila' => $row, 'columna' => $col],
+            [
+                'lote' => 'required|integer|min:1|max:1000000000',
+                'muestras' => 'required|integer|min:1|lte:lote',
+                'fila' => 'required|integer|between:1,250',
+                'columna' => 'required|integer|between:1,20',
+            ],
+            [
+                'lote.max' => 'El lote no puede ser mayor a 1.000.000.000.',
+                'muestras.lte' => 'Las muestras no pueden ser más que las unidades del lote.',
+                'fila.between' => 'La fila debe estar entre 1 y 250.',
+                'columna.between' => 'La columna debe estar entre 1 y 20.',
+                'integer' => 'El campo :attribute debe ser un número entero.',
+                'min' => 'El campo :attribute debe ser al menos :min.',
+                'required' => 'El campo :attribute es obligatorio.',
+            ]
+        );
+
+        // Se vuelve al formulario de inicio: /form redirige a la URL del muestreo y "volver atrás" haría un bucle
+        if($validator->fails())
+            throw (new ValidationException($validator))->redirectTo(url('/'));
+    }
 
     public static function nch43($lote, $samples, $row, $col)
     {
+        V2Controller::validar($lote, $samples, $row, $col);
+
         $row1	=	"6347437386369647366146986371623326168045";
         $row2	=	"9774246762428114572042533237322707360751";
         $row3	=	"1676622766565026710732907978531355385859";
@@ -270,12 +302,14 @@ class V2Controller extends Controller
         $columnas_a_usar = round($procedimiento->digits/2);
 
         $valido=0;
-        
+
         $salida = [];
+        $tomados = []; // valores finales ya leídos, para descartar repetidos (Art. 9)
 
         if($procedimiento->move == "utd"){
             $aux = 0;
             while($valido < $samples){
+                V2Controller::controlarLecturas(count($salida), $samples);
                 $numero = collect();
                 $fila = "row".$row;
                 if($columnas_a_usar + $col > 20){
@@ -311,7 +345,8 @@ class V2Controller extends Controller
                 }
 
                 if($row_flag == 1){
-                    $numero->put('fila', $row." | ".$row + 1);
+                    // Después de la fila 250 se continúa en la fila 1 (Art. 6.3)
+                    $numero->put('fila', $row." | ".($row == 250 ? 1 : $row + 1));
                 }else{
                     $numero->put('fila', $row);
                 }
@@ -321,10 +356,11 @@ class V2Controller extends Controller
 
                 V2Controller::operations($procedimiento, $number, $numero, $lote);
 
-                if(V2Controller::isAlreadyTake($numero, $salida)){
+                if(isset($tomados[(int) $numero['valor_final']])){
                     $numero->put('valido', false);
                     $numero->put('comentario', "Número considerado previamente.");
                     }
+                $tomados[(int) $numero['valor_final']] = true;
                 if($numero['valido'])
                     $valido++;
                 
@@ -349,6 +385,7 @@ class V2Controller extends Controller
                 $col_aux = $col*2 - 2;
                 $secondary_col = 1;
                 while($valido < $samples){
+                    V2Controller::controlarLecturas(count($salida), $samples);
                     $col_2 = round(($col_aux+1)/2);
                     $numero = collect();
                     $fila = "row".$row;
@@ -356,12 +393,13 @@ class V2Controller extends Controller
                     $number = $number[$col_aux];
                     $numero->put('fila', $row);
                     $numero->put('columna', $col_2.".".$secondary_col);
-    
+
                     V2Controller::operations($procedimiento, $number, $numero, $lote);
-                    if(V2Controller::isAlreadyTake($numero, $salida)){
+                    if(isset($tomados[(int) $numero['valor_final']])){
                         $numero->put('valido', false);
                         $numero->put('comentario', "Número considerado previamente.");
                     }
+                    $tomados[(int) $numero['valor_final']] = true;
                     if($numero['valido'])
                         $valido++;
     
@@ -380,18 +418,20 @@ class V2Controller extends Controller
             }else{
                 $col_aux = $col - 1;
                 while($valido < $samples){
+                    V2Controller::controlarLecturas(count($salida), $samples);
                     $numero = collect();
                     $fila = "row".$row;
                     $number = str_split($$fila, $procedimiento->digits);
                     $number = $number[$col_aux];
                     $numero->put('fila', $row);
                     $numero->put('columna', $col_aux+1);
-    
+
                     V2Controller::operations($procedimiento, $number, $numero, $lote);
-                    if(V2Controller::isAlreadyTake($numero, $salida)){
+                    if(isset($tomados[(int) $numero['valor_final']])){
                         $numero->put('valido', false);
                         $numero->put('comentario', "Número considerado previamente.");
                     }
+                    $tomados[(int) $numero['valor_final']] = true;
                     if($numero['valido'])
                         $valido++;
     
@@ -446,16 +486,13 @@ class V2Controller extends Controller
         }        
     }
 
-    public static function isAlreadyTake($numero, $salidas)
+    public static function controlarLecturas($leidos, $samples)
     {
-        foreach($salidas as $salida){
-            if ($salida['valor_final'] == $numero['valor_final']){             
-                return true;
-
-            }
+        if($leidos >= self::MAX_LECTURAS){
+            throw ValidationException::withMessages([
+                'muestras' => 'La tabla de la norma no contiene '.$samples.' números distintos válidos para este lote. Reduzca la cantidad de muestras.',
+            ])->redirectTo(url('/'));
         }
-            return false;
-        
     }
 
     public static function itsZeros($numero, $reglas){
@@ -487,7 +524,7 @@ class V2Controller extends Controller
         $last_row = explode(" | ", $last_number->fila);
         $last_column = explode(" | ",$last_number->columna);
         $pdf = Pdf::loadView('welcome2', [
-            'data'=> V2Controller::nch43($lote, $samples, $row, $column),
+            'data'=> $data,
             'lote' => $lote,
             'muestras' => $samples,
             'inicial' => $initial_coordinate,
