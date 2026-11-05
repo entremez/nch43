@@ -14,6 +14,7 @@
                         <p class="mt-3 text-base underline">b. <a href="/80/4/1/11">https://nch43.cl/80/4/1/11</a></p>
                         <p class="mt-3 text-base underline" >c. <a href="/180/10/2/15">https://nch43.cl/180/10/2/15</a></p>
                         <p class="mt-6 text-base">Nota: el ejemplo 3a de la norma muestra la serie original con números repetidos (9; 5; 9; 6; 3; 7; 3; 13; 6; 7; 1). El sitio siempre entrega números sin repetición (Art. 9 y 10), por lo que sus primeros 7 números coinciden con el ejemplo N°4 (9; 5; 6; 3; 7; 13; 1) y luego continúa leyendo la tabla hasta completar las 11 muestras.</p>
+                        <p class="mt-3 text-base">En el ejemplo N°2 la norma indica que la última coordenada del ejemplo N°1 es "152/2", pero corresponde a 152/20: es la columna donde termina el número 096, y la continuación del mismo ejemplo N°2 (700; 554; 511) parte desde ahí.</p>
                         <p class="mt-3 text-base">En el ejemplo 3c la norma indica "772 (3 · 200 + 172)", pero en la tabla la fila 7, columnas 15 y 16, contiene 67 21, es decir 672 = 3 · 200 + 72. El sitio usa el valor de la tabla.</p>
                     </div>
 </main>

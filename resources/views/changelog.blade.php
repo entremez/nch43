@@ -7,7 +7,7 @@
         <div class="">
         <h1 class="text-3xl font-bold py-4">Control de cambios</h1>
         <h1 class="text-xl font-bold ">05-11-2026</h1>
-            <p class="text-base">Se actualiza el sitio a Laravel 12 y PHP 8.3, con versiones vigentes de las librerías de PDF y Excel. El cálculo de las muestras se hace más rápido sin cambiar resultados: se comparó con la versión anterior en más de 130.000 casos, con resultados idénticos.</p>
+            <p class="text-base">Se actualiza el sitio a Laravel 12 y PHP 8.3, con versiones vigentes de las librerías de PDF y Excel. El cálculo de las muestras se hace más rápido sin cambiar resultados: se comparó con la versión anterior en más de 130.000 casos, con resultados idénticos. Se agregan ejemplos a las consideraciones y se documenta la errata "152/2" del anexo.</p>
         <h1 class="text-xl font-bold ">02-11-2026</h1>
             <p class="text-base">Se validan lote, muestras y coordenadas (antes un lote menor que las muestras o una coordenada fuera de la tabla dejaba el sitio sin responder o generaba un número inexistente). Se corrige la fila mostrada al pasar de la fila 250 a la 1 y se precisa la redacción de las consideraciones.</p>
         <h1 class="text-xl font-bold ">30-08-2024</h1>

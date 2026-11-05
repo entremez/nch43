@@ -6,12 +6,14 @@
     <div class="px-8 mt-9">
         <div class="">
             <h1 class="text-4xl font-bold ">Algunas consideraciones</h1>
-            <p class="mt-6 text-xl">Dado que en algunos puntos la norma no es tan específica ni proporciona ejemplos para orientarse, se tomaron decisiones de diseño para casos especiales.</p>
+            <p class="mt-6 text-xl">Dado que en algunos puntos la norma NCh 43.Of61 no es específica ni proporciona ejemplos, se adoptaron los siguientes criterios para casos especiales. En todos ellos la lectura de la tabla es fija y reproducible, y no depende de la persona que realiza el muestreo.</p>
             <p class="mt-4 text-base font-bold">Caso 1: Sobrepasar la columna 20</p>
             <p class="mt-2 text-base">Cuando un número requiere más dígitos de los disponibles hasta la columna 20, los dígitos faltantes se toman desde la columna 1 del renglón siguiente, aplicando la misma continuidad que el Art. 6.1 establece para la lectura horizontal. La lectura sigue siendo de arriba hacia abajo (Art. 6.2).</p>
+            <p class="mt-2 text-base"><span class="font-semibold">Ejemplo:</span> lote 700, 3 muestras, coordenada inicial 72/20 → 519 (51 + 9), 073 (07 + 3), 587 (58 + 7). <a class="underline" href="/700/3/72/20">Ver en el sitio</a></p>
             <img src="caso1.png" alt="imágen de la norma ejemplificando caso 1">
             <p class="mt-6 text-base font-bold">Caso 2: Sobrepasar la columna 20 y la última fila de una página</p>
             <p class="mt-2 text-base">Si además se ha llegado al último renglón de la página, los dígitos faltantes se toman de la columna 1 del primer renglón de la página siguiente (Art. 6.3); después de la fila 250 se continúa en la fila 1. Como ese dígito ya fue utilizado, la lectura de los números siguientes continúa en las columnas 2 y 3 de esa página, de modo que ningún dígito de la tabla se utilice dos veces.</p>
+            <p class="mt-2 text-base"><span class="font-semibold">Ejemplo:</span> lote 700, 3 muestras, coordenada inicial 175/20 → 486 (48 + 6), 080 (08 0, columnas 2-3 de la fila 176), 239 (fila 177). <a class="underline" href="/700/3/175/20">Ver en el sitio</a></p>
             <img src="caso2.png" alt="imágen de la norma ejemplificando caso 2">
         </div>
     </div>
