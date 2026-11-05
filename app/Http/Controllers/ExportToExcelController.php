@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\V2Controller;
 use PhpOffice\PhpSpreadsheet\Spreadsheet; 
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx; 
@@ -53,12 +52,11 @@ class ExportToExcelController extends Controller
             $sheet->setCellValue('G'.$key+7,$row->valor_final);
             $sheet->setCellValue('H'.$key+7,$row->comentario??='');
         }        
-        // Write an .xlsx file  
+        // Write an .xlsx file
         $writer = new Xlsx($spreadsheet);
         $name = 'Lote:'.$lote.'_Muestras:'.$muestras;
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="' . urlencode($name) . '.xlsx"'); 
-        // Save .xlsx file to the current directory 
-        $writer->save('php://output');
+        return response()->streamDownload(fn () => $writer->save('php://output'), urlencode($name).'.xlsx', [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
     }
 }

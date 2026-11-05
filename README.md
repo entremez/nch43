@@ -8,17 +8,40 @@ Este proyecto permite generar muestras aleatorias desde un lote finito, cumplien
 
 ## 🚀 Instalación y ejecución
 
+Requisitos: PHP 8.3 o superior con las extensiones `gd`, `zip`, `mbstring`, `xml` y `dom`, y Composer 2. No usa base de datos ni Node.js.
+
 ```bash
 git clone https://github.com/entremez/nch43.git
 cd nch43
-npm install     
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan serve  (Si se utiliza en local)
 ```
 
-> ⚠️ Asegúrate de tener instalado Node.js, según la versión que estés usando.
+En producción: `composer install --no-dev --optimize-autoloader`, `APP_ENV=production` y `APP_DEBUG=false` en el `.env`, y luego `php artisan optimize`. La carpeta raíz del servidor web debe ser `public/`, y `storage/` y `bootstrap/cache/` deben tener permiso de escritura. `/up` responde 200 si el sitio está funcionando, lo que sirve para monitorearlo.
+
+Tests: `php artisan test`.
+
+## 🐳 Docker
+
+Para levantar el sitio en cualquier equipo con Docker (por ejemplo, un PC o un VPS), sin instalar PHP:
+
+```bash
+git clone https://github.com/entremez/nch43.git
+cd nch43
+docker compose up -d --build
+```
+
+El sitio queda en http://localhost:8043. La imagen trae PHP 8.3, Apache y OPcache, y corre en modo producción (`APP_DEBUG=false`).
+
+- **Puerto u otra URL:** `NCH43_PORT=80 APP_URL=https://nch43.cl docker compose up -d`. También se pueden dejar esas variables en un archivo `.env` junto a `docker-compose.yml`.
+- **Clave de la app (`APP_KEY`):** si no se define, se genera la primera vez y se guarda en el volumen `storage`, así que se mantiene entre reinicios.
+- **Actualizar:** `git pull` y luego `docker compose up -d --build`.
+- **Revisar:** `docker compose ps` muestra `healthy` cuando `/up` responde. Los errores se ven con `docker compose logs -f`.
+- **Detener:** `docker compose down`. Con `-v` también se borra el volumen, incluida la clave generada.
+
+En un servidor público, se pone delante un proxy con HTTPS (Nginx, Caddy o Traefik) que redirija al puerto del contenedor.
 
 ## 🧪 Uso
 

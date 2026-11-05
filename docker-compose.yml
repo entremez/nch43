@@ -1,0 +1,27 @@
+name: nch43
+
+services:
+  app:
+    build: .
+    image: nch43:latest
+    container_name: nch43
+    restart: unless-stopped
+    ports:
+      - "${NCH43_PORT:-8043}:80"
+    environment:
+      APP_NAME: nch43
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: ${APP_URL:-http://localhost:8043}
+      APP_KEY: ${APP_KEY:-}
+      APP_LOCALE: es
+      LOG_CHANNEL: stderr
+      LOG_LEVEL: warning
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+    volumes:
+      - storage:/var/www/html/storage
+
+volumes:
+  storage:
