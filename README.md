@@ -8,17 +8,20 @@ Este proyecto permite generar muestras aleatorias desde un lote finito, cumplien
 
 ## 🚀 Instalación y ejecución
 
+Requisitos: PHP 8.3 o superior con las extensiones `gd`, `zip`, `mbstring`, `xml` y `dom`, y Composer 2. No usa base de datos ni Node.js.
+
 ```bash
 git clone https://github.com/entremez/nch43.git
 cd nch43
-npm install     
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan serve  (Si se utiliza en local)
 ```
 
-> ⚠️ Asegúrate de tener instalado Node.js, según la versión que estés usando.
+En producción: `composer install --no-dev --optimize-autoloader`, `APP_ENV=production` y `APP_DEBUG=false` en el `.env`, y luego `php artisan optimize`. La carpeta raíz del servidor web debe ser `public/`, y `storage/` y `bootstrap/cache/` deben tener permiso de escritura. `/up` responde 200 si el sitio está funcionando, lo que sirve para monitorearlo.
+
+Tests: `php artisan test`.
 
 ## 🧪 Uso
 

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Http\Controllers\V2Controller;
 use Illuminate\Validation\ValidationException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class Nch43Test extends TestCase
@@ -119,16 +120,14 @@ class Nch43Test extends TestCase
         }
     }
 
-    /**
-     * @dataProvider entradasInvalidas
-     */
+    #[DataProvider('entradasInvalidas')]
     public function test_rechaza_entradas_invalidas($lote, $muestras, $fila, $columna)
     {
         $this->expectException(ValidationException::class);
         V2Controller::nch43($lote, $muestras, $fila, $columna);
     }
 
-    public function entradasInvalidas()
+    public static function entradasInvalidas()
     {
         return [
             'muestras mayor que el lote' => [15, 16, 1, 1],
